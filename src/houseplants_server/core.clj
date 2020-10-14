@@ -8,15 +8,6 @@
                                                      format-request-middleware
                                                      format-response-middleware]]))
 
-;;TODO: Move server atom and repl functionality to separate namespace
-
-(defonce server (atom nil))
-
-(defn stop-server []
-  (when-not (nil? @server)
-    (@server :timeout 100)
-    (reset! server nil)))
-
 (def app
   (ring/ring-handler
    (ring/router
@@ -37,20 +28,6 @@
      {:not-found (constantly {:status 404
                               :body "Not Found"})}))))
 
-#_(defn -main []
-  (println "Starting server")
+(defn -main [arg]
+  (println "Starting server" arg)
     (run-server app {:port 4000}))
-
-(defn -main []
-  (println "Starting server")
-  (reset! server (run-server app {:port 4000})))
-
-(defn restart-server []
-  (stop-server)
-  (-main))
-
-(comment
-  (restart-server)
-  @server
-  (app {:request-method :get
-         :uri "/plants"}))
