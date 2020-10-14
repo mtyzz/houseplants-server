@@ -52,7 +52,7 @@
                ["Corn Plant"
                 "Dracaena fragrans"
                 14
-                "part shade"]
+                "part sun"]
                ["Boston Fern"
                 "Nephrolepsis-exaltata"
                 3
