@@ -1,63 +1,35 @@
 (ns houseplants-server.core
-  (:require [houseplants-server.db :as db]
+  (:require [houseplants-server.db :refer [new-table-with-seed]]
+            [houseplants-server.routes :as routes]
             [muuntaja.core :as m]
             [org.httpkit.server :refer [run-server]]
+            [reitit.coercion.spec]
             [reitit.ring :as ring]
+            [reitit.ring.coercion :as c]
             [reitit.ring.middleware.exception :refer [exception-middleware]]
-            [reitit.ring.middleware.muuntaja :refer [format-negotiate-middleware
-                                                     format-request-middleware
-                                                     format-response-middleware]]))
+            [reitit.ring.middleware.muuntaja :as mm]
+            [reitit.ring.middleware.parameters :refer [parameters-middleware]]))
 ;; app routes
 (def app
   (ring/ring-handler
    (ring/router
-    [["/health" {:get (fn [req]
-                        {:status 200
-                         :body "ok"})}]
-     ["/plants" {:get (fn [req]
-                        {:status 200
-                         :body (db/get-all-plants db/config)})}]]
-    {:data {:muuntaja m/instance
-            :middleware [format-negotiate-middleware
-                         format-response-middleware
+    [routes/app-routes
+     routes/plants-routes]
+    {:data {:coercion reitit.coercion.spec/coercion
+            :muuntaja m/instance
+            :middleware [parameters-middleware
+                         mm/format-negotiate-middleware
+                         mm/format-response-middleware
                          exception-middleware
-                         format-request-middleware]}})
+                         mm/format-request-middleware
+                         c/coerce-request-middleware
+                         c/coerce-response-middleware
+                         c/coerce-exceptions-middleware]}})
    (ring/routes
     (ring/redirect-trailing-slash-handler)
     (ring/create-default-handler
      {:not-found (constantly {:status 404
                               :body "Not Found"})}))))
-
-;;set up and seed the database
-(defn new-table-with-seed []
-  (db/remove-plants-table db/config)
-  (db/create-plants-table db/config)
-  (db/insert-plants
-   db/config {:plants
-              [["Heartleaf Philodendron"
-                "Philodendron cordatum"
-                7
-                "bright shade"]
-               ["Philodendron Brasil"
-                "Philodendron cordatum"
-                7
-                "bright shade"]
-               ["Silver Pothos"
-                "Scindapsus pictus"
-                9
-                "part sun"]
-               ["Satin Pothos"
-                "Scindapsus pictus"
-                9
-                "part sun"]
-               ["Corn Plant"
-                "Dracaena fragrans"
-                14
-                "part sun"]
-               ["Boston Fern"
-                "Nephrolepsis-exaltata"
-                3
-                "shade"]]}))
 
 (defn -main []
   (println "Creating new plants table with data")
