@@ -14,6 +14,6 @@
    ["/name/:name" {:parameters {:path {:name string?}}
                    :get h/get-plants-by-name}]
    ["/cadence/:cadence" {:parameters {:path {:cadence int?}}
-                         :get h/get-plant-by-cadence}]
+                         :get h/get-plants-by-cadence}]
    ["/light/:light" {:parameters {:path {:light string?}}
                      :get h/get-plants-by-light}]])

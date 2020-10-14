@@ -8,10 +8,8 @@
    :user "postgres"
    :password "password"})
 
-(defn create-sql-array [con coll]
-  (println "config is " con "and coll is " coll)
-  (.createArrayOf (clojure.java.jdbc/get-connection con) "varchar" (into-array String coll)))
-
+;;All sql expressions are defined in resources/plants.sql
+;;hugsql turns these into Clojure fns
 (hugsql/def-db-fns "plants.sql")
 
 ;;set up and seed the database

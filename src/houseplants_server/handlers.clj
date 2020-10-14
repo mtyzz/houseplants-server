@@ -19,5 +19,6 @@
    :body (db/get-plant-by-cadence db/config (:path parameters))})
 
 (defn get-plants-by-light [{:keys [parameters]}]
-  {:status 200
-   :body (db/get-plant-by-light db/config (:path parameters))})
+  (let [light (get-in parameters [:path :light])]
+    {:status 200
+     :body (db/get-plant-by-light db/config {:light (str "%" light "%")})}))
