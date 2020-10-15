@@ -5,6 +5,7 @@ Got a lot of houseplants? Generate a watering schedule--in Clojure! You will run
 
 ## What you will need to install to run this
 Follow the links to download and install instructions for these common tools.
+- [Github CLI](https://github.com/cli/cli)
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker-compose](https://docs.docker.com/compose/install/)
 - [Postgres](https://www.postgresql.org/download/)
