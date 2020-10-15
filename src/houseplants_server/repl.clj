@@ -29,28 +29,4 @@
 ;;function for seeding the database
 (defn seed-existing-table []
   (db/insert-plants
-   db/config {:plants
-              [["Heartleaf Philodendron"
-                "Philodendron cordatum"
-                7
-                "bright shade"]
-               ["Philodendron Brasil"
-                "Philodendron cordatum"
-                7
-                "bright shade"]
-               ["Silver Pothos"
-                "Scindapsus pictus"
-                9
-                "part sun"]
-               ["Satin Pothos"
-                "Scindapsus pictus"
-                9
-                "part sun"]
-               ["Corn Plant"
-                "Dracaena fragrans"
-                14
-                "part shade"]
-               ["Boston Fern"
-                "Nephrolepsis-exaltata"
-                3
-                "shade"]]}))
+   db/config db/seed-data))
