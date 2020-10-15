@@ -10,6 +10,7 @@
             [reitit.ring.middleware.muuntaja :as mm]
             [reitit.ring.middleware.parameters :refer [parameters-middleware]]
             [reitit.swagger-ui :as swagger-ui]))
+
 ;; app routes
 (def app
   (ring/ring-handler
@@ -37,6 +38,7 @@
      {:not-found (constantly {:status 404
                               :body "Not Found"})}))))
 
+;;Assume user is firing up as a toy, recreate table every time
 (defn -main []
   (println "Creating new plants table with data")
   (new-table-with-seed)

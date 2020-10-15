@@ -3,7 +3,7 @@
             [clojure.test :refer :all]
             [ring.mock.request :as mock]))
 
-(deftest test-app
+(deftest test-app-routes
   (testing "main route redirect"
     (let [response (app (mock/request :get "/"))]
       (is (= (:status response) 302))
