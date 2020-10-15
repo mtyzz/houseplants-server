@@ -24,29 +24,45 @@ SELECT * FROM plants;
 
 -- :name get-plant-by-id :query :*
 SELECT * FROM plants
-where id = :id;
+WHERE id = :id;
 
 -- :name get-plant-by-name :query :*
 SELECT * FROM plants
-where common_name ilike :name OR scientific_name ilike :name;
+ WHERE common_name ilike :name
+    OR scientific_name ilike :name;
 
 -- :name get-plant-by-light :query :*
 SELECT * FROM plants
-where light ilike :light;
+WHERE light ilike :light;
 
 -- :name get-plant-by-cadence :query :*
 SELECT * FROM plants
-where cadence = :cadence;
+WHERE cadence = :cadence;
 
 -- :name insert-plant :insert :*
-INSERT INTO plants (common_name, scientific_name, cadence, light)
-VALUES (:common-name, :scientific-name, :cadence, :light)
-RETURNING id;
+INSERT INTO plants (
+  common_name,
+  scientific_name,
+  cadence,
+  light
+)
+VALUES (
+  :common-name,
+  :scientific-name,
+  :cadence,
+  :light
+)
+RETURNING
+  id;
 
 -- :name update-plant-by-id :execute :1
 UPDATE plants
-SET common_name = :common-name, scientific_name = :scientific-name, cadence = :cadence, light = :light
-where id = :id;
+SET
+  common_name = :common-name,
+  scientific_name = :scientific-name,
+  cadence = :cadence,
+  light = :light
+WHERE id = :id;
 
 -- :name delete-plant-by-id :execute :1
 DELETE FROM plants where id = :id;
@@ -54,5 +70,11 @@ DELETE FROM plants where id = :id;
 -- :name insert-plants :! :n
 -- :doc Insert multiple plants at once
 
-INSERT INTO plants (common_name, scientific_name, cadence, light)
-VALUES :tuple*:plants;
+INSERT INTO plants (
+  common_name,
+  scientific_name,
+  cadence,
+  light
+)
+VALUES
+:tuple*:plants;

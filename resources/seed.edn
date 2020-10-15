@@ -1,0 +1,37 @@
+{:plants
+ [["Heartleaf Philodendron"
+   "Philodendron cordatum"
+   7
+   "bright shade"]
+  ["Philodendron Brasil"
+   "Philodendron cordatum"
+   7
+   "bright shade"]
+  ["Silver Pothos"
+   "Scindapsus pictus"
+   9
+   "part sun"]
+  ["Satin Pothos"
+   "Scindapsus pictus"
+   9
+   "part sun"]
+  ["Corn Plant"
+   "Dracaena fragrans"
+   14
+   "part sun"]
+  ["Boston Fern"
+   "Nephrolepsis-exaltata"
+   3
+   "shade"]
+  ["Monstera deliciosa"
+   "Monstera"
+   6
+   "part sun"]
+  ["Rhaphidophora tetrasperma"
+   "Mini Monstera"
+   7
+   "bright shade"]
+  ["Asterophytum myriostigma"
+   "Star Cactus"
+   21
+   "full sun"]]}
