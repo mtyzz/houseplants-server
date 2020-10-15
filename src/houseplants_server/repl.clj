@@ -26,38 +26,7 @@
         :uri "/plants"}))
 
 
-;;functions for setting up and seeding the database
-
-(defn new-table-with-seed []
-  (db/remove-plants-table db/config)
-  (db/create-plants-table db/config)
-  (db/insert-plants
-   db/config {:plants
-              [["Heartleaf Philodendron"
-                "Philodendron cordatum"
-                7
-                "bright shade"]
-               ["Philodendron Brasil"
-                "Philodendron cordatum"
-                7
-                "bright shade"]
-               ["Silver Pothos"
-                "Scindapsus pictus"
-                9
-                "part sun"]
-               ["Satin Pothos"
-                "Scindapsus pictus"
-                9
-                "part sun"]
-               ["Corn Plant"
-                "Dracaena fragrans"
-                14
-                "part sun"]
-               ["Boston Fern"
-                "Nephrolepsis-exaltata"
-                3
-                "shade"]]}))
-
+;;function for seeding the database
 (defn seed-existing-table []
   (db/insert-plants
    db/config {:plants

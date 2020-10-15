@@ -2,16 +2,19 @@
   (:require [houseplants-server.handlers :as h]
             [reitit.swagger :as swagger]))
 
+;;Raw swagger documentation in json
 (def swagger-route
   ["/swagger.json"
    {:get {:no-doc true
           :swagger {:info {:title "houseplants-server"}}
           :handler (swagger/create-swagger-handler)}}])
 
+;;health check
 (def app-routes
   ["/health" {:get (fn [req]
                {:status 200 :body "ok"})}])
 
+;;API routes
 (def plants-routes
   ["/plants" {:swagger {:tags ["plants"]}}
 
