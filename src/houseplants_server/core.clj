@@ -8,12 +8,14 @@
             [reitit.ring.coercion :as c]
             [reitit.ring.middleware.exception :refer [exception-middleware]]
             [reitit.ring.middleware.muuntaja :as mm]
-            [reitit.ring.middleware.parameters :refer [parameters-middleware]]))
+            [reitit.ring.middleware.parameters :refer [parameters-middleware]]
+            [reitit.swagger-ui :as swagger-ui]))
 ;; app routes
 (def app
   (ring/ring-handler
    (ring/router
-    [routes/app-routes
+    [routes/swagger-route
+     routes/app-routes
      routes/plants-routes]
     {:data {:coercion reitit.coercion.spec/coercion
             :muuntaja m/instance
@@ -27,6 +29,10 @@
                          c/coerce-exceptions-middleware]}})
    (ring/routes
     (ring/redirect-trailing-slash-handler)
+    (swagger-ui/create-swagger-ui-handler
+     {:path "/"
+      :config {:validatorUrl nil
+               :operationsSorter "alpha"}})
     (ring/create-default-handler
      {:not-found (constantly {:status 404
                               :body "Not Found"})}))))
